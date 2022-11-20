@@ -24,13 +24,13 @@ if (isset($_POST['submit'])) {
     $sql = "SELECT * FROM users WHERE email = '$email'";
     $query = mysqli_query($connect, $sql);
 
-    if ($query -> num_rows == 1) {
-      $user = $query -> fetch_assoc();
+    if ($query->num_rows == 1) {
+      $user = $query->fetch_assoc();
       if (password_verify($password, $user['password'])) {
         $_SESSION['user_login'] = $user;
         header('location: index.php');
       }
-    } else{
+    } else {
       $errors['error_acc'] = "Invalid Account";
     }
   }
@@ -48,12 +48,13 @@ if (isset($_POST['submit'])) {
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
 <body>
   <?php include "layout/header.php" ?>
 
-  <div class="container">
+  <div class="container py-5">
     <div class="row justify-content-around">
       <div class="col-lg-6">
         <form method="POST">

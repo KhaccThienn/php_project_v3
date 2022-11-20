@@ -1,6 +1,11 @@
 <?php
 include "connection/connect.php";
 $errors = [];
+
+$sql = "SELECT * FROM users";
+
+$result = $connect->query($sql);
+
 if (isset($_POST['submit'])) {
   $name = $_POST['name'];
   $email = $_POST['email'];
@@ -17,6 +22,25 @@ if (isset($_POST['submit'])) {
   } else {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $errors['mail_invalid'] = "Invalid email address";
+    }
+    foreach ($result as $key => $value) {
+      if ($value['email'] === $email) {
+        $errors['mail_haved'] = "Email: $email already exists";
+      }
+    }
+  }
+  $phoneRgx = "/^(84|0[3|5|7|8|9])+([0-9]{8})\b$/";
+  if (empty($phone)) {
+    $errors['mail_required'] = "Phone Number must not be empty";
+  } else {
+
+    if (!preg_match($phoneRgx, $phone)) {
+      $errors['phone_invalid'] = "Invalid Phone number";
+    }
+    foreach ($result as $key => $value) {
+      if ($value['phone'] === $phone) {
+        $errors['phone_haved'] = "Phone Number: $phone already exists";
+      }
     }
   }
 
@@ -54,12 +78,13 @@ if (isset($_POST['submit'])) {
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
 <body>
   <?php include "layout/header.php" ?>
 
-  <div class="container">
+  <div class="container py-5">
     <div class="row justify-content-around">
       <div class="col-lg-6">
         <form method="POST">
@@ -89,8 +114,8 @@ if (isset($_POST['submit'])) {
           </div>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Phone Address</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name="phone">
+            <label for="phone">Phone Address</label>
+            <input type="text" class="form-control" id="phone" name="phone">
           </div>
 
           <div class="form-group">

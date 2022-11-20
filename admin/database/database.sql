@@ -1,3 +1,4 @@
+-- Active: 1668496443200@@127.0.0.1@3306@shopping
 CREATE DATABASE `shopping` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `category` (
@@ -68,4 +69,3 @@ ADD CONSTRAINT `fk_orders_detail_far_product`
     REFERENCES `product` (`id`);
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `status`, `role`) VALUES (NULL, 'Admin Manager', 'admin@gmail.com', 'admin123', '0392689213', '1', '1');
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `status`, `role`) VALUES (NULL, 'User1', 'user@gmail.com', 'user123', '0392689214', '1', '0');

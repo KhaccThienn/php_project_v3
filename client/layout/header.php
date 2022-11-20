@@ -1,5 +1,8 @@
 <?php
+include "connection/connect.php";
 $user = isset($_SESSION['user_login']) ? $_SESSION['user_login'] : [];
+$sqlCate = "SELECT * FROM category WHERE status = 1";
+$result = $connect->query($sqlCate);
 ?>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Navbar</a>
@@ -25,8 +28,14 @@ $user = isset($_SESSION['user_login']) ? $_SESSION['user_login'] : [];
           Shop
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownId">
-          <a class="dropdown-item" href="">Nam</a>
-          <a class="dropdown-item" href="">Nu</a>
+          <a class="dropdown-item" href="shop.php">
+            All Products
+          </a>
+          <?php foreach ($result as $key => $value) { ?>
+            <a class="dropdown-item" href="shop.php?category=<?= $value['id'] ?>">
+              <?= $value['name'] ?>
+            </a>
+          <?php } ?>
         </div>
       </li>
 

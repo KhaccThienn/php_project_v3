@@ -1,6 +1,12 @@
 <?php
+include "connection/connect.php";
 ob_start();
 session_start();
+
+$sqlBanner = "SELECT * FROM banner WHERE status = 1";
+
+$banners = $connect->query($sqlBanner);
+
 ?>
 
 <!doctype html>
@@ -14,12 +20,40 @@ session_start();
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
 <body>
   <?php include "layout/header.php" ?>
 
-  
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <?php foreach ($banners as $key => $banner) : ?>
+        <li data-target="#carouselExampleCaptions" data-slide-to="<?= $key; ?>" class="<?= $key == 0 ? 'active' : ''; ?>"></li>
+      <?php endforeach; ?>
+    </ol>
+
+    <div class="carousel-inner">
+      <?php foreach ($banners as $key => $value) { ?>
+
+        <div class="carousel-item <?= $key == 0 ? 'active' : ''; ?>">
+          <img src="<?= $value['image'] ?>" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5><?= $value['name'] ?></h5>
+            <p><?= $value['description'] ?></p>
+          </div>
+        </div>
+      <?php } ?>
+    </div>
+    <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </button>
+  </div>
 
   <?php include "layout/footer.php" ?>
   <!-- Optional JavaScript -->
