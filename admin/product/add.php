@@ -38,8 +38,9 @@ if (isset($_POST['submit'])) {
   if (empty($sale_price)) {
     $errors['saleprice_required'] = "Sale Price is required";
   } else {
-    if (!filter_var($sale_price,  FILTER_VALIDATE_FLOAT)) {
-      $errors['price_invalid'] = "Price must be a number";
+    $priceRgx = "/^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/";
+    if (!preg_match($priceRgx, $sale_price)) {
+      $errors['price_invalid'] = "Sale Price must be a number";
     } elseif ($sale_price < 0) {
       $errors['greather_price'] = "Sale Price must be greater than zero";
     } elseif ($sale_price > $price) {

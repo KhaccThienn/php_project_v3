@@ -28,15 +28,17 @@ if (isset($_POST['email'])) {
     }
 
     if (!$error) {
-      $sql = "SELECT * FROM users WHERE email='$email' AND password ='$password' AND role = 1";
+      $sql = "SELECT * FROM users WHERE email = '$email'";
       $query = mysqli_query($connect, $sql);
 
-      if (mysqli_num_rows($query) == 1) {
-        $user = mysqli_fetch_assoc($query);
-        $_SESSION['admin_login'] = $user;
-        header('location: index.php');
+      if ($query->num_rows == 1) {
+        $admin = $query->fetch_assoc();
+        if (password_verify($password, $admin['password']) && $admin['role'] == 1) {
+          $_SESSION['admin_login'] = $admin;
+          header('location: index.php');
+        }
       } else {
-        $error['invalid_account'] = 'Invalid Account, Please Try Again';
+        $errors['error_acc'] = "Invalid Account";
       }
     }
   } while (false);
