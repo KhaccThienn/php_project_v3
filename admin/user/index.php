@@ -24,7 +24,6 @@ $sql .= " LIMIT $start, $limit";
 $result = mysqli_query($connect, $sql);
 
 
-
 ?>
 <section class="content-header">
   <div class="container-fluid">
@@ -126,8 +125,8 @@ $result = mysqli_query($connect, $sql);
                   <?php } ?>
                 </td>
                 <td>
-                  <a href="?page=product/update.php&id=<?= $value['id'] ?>" class="btn btn-success">Update</a>
-                  <a href="?page=product/delete.php&id=<?= $value['id'] ?>" class="btn btn-danger" onclick="return confirm('Are You Sure About That ??')">Delete</a>
+                  <a href="?page=user/update.php&id=<?= $value['id'] ?>" class="btn btn-success">Update</a>
+                  <a href="?page=user/delete.php&id=<?= $value['id'] ?>" class="btn btn-danger" onclick="return confirm('Are You Sure About That ??')">Delete</a>
                 </td>
               </tr>
             <?php } else { ?>
@@ -161,8 +160,8 @@ $result = mysqli_query($connect, $sql);
                   <?php } ?>
                 </th>
                 <th>
-                  <a href="?page=product/update.php&id=<?= $value['id'] ?>" class="btn btn-success">Update</a>
-                  <a href="?page=product/delete.php&id=<?= $value['id'] ?>" class="btn btn-danger" onclick="return confirm('Are You Sure About That ??')">Delete</a>
+                  <a href="?page=user/update.php&id=<?= $value['id'] ?>" class="btn btn-success">Update</a>
+                  <a href="?page=user/delete.php&id=<?= $value['id'] ?>" class="btn btn-danger" onclick="return confirm('Are You Sure About That ??')">Delete</a>
                 </th>
               </tr>
             <?php } ?>

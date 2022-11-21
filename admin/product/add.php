@@ -71,6 +71,7 @@ if (isset($_POST['submit'])) {
   }
 }
 ?>
+
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -151,7 +152,7 @@ if (isset($_POST['submit'])) {
     <!-- /.box-body -->
 
     <div class="box-footer">
-      <button type="submit" name="submit" class="btn btn-primary btn-block">Submit</button>
+      <button type="submit" name="submit" class="btn btn-outline-primary btn-block">Submit</button>
     </div>
   </form>
 

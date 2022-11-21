@@ -81,7 +81,7 @@ ob_end_flush();
     <!-- /.box-body -->
 
     <div class="box-footer">
-      <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" name="submit" class="btn btn-outline-primary">Submit</button>
     </div>
   </form>
 
