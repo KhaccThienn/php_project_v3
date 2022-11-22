@@ -1,9 +1,13 @@
 <?php
 include "layout/header.php";
 $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+$user = isset($_SESSION['user_login']) ? $_SESSION['user_login'] : [];
+if (!$user) {
+  header('location: login.php');
+}
 ?>
 
-<div class="container p-5">
+<div class="container-fluid p-5">
   <div class="text-center">
     <h3 class="text-success">Cart</h3>
   </div>
@@ -28,10 +32,13 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
           <td><?php echo $n; ?></td>
           <td><?= $value['id'] ?></td>
           <td><?= $value['name'] ?></td>
-          <td class="w-25">
+          <td class="img" style="width: 10%;">
             <img src="../admin/uploads/<?= $value['image'] ?>" alt="" class="card-img">
           </td>
-          <td><?= $value['price'] ?></td>
+          <td>
+            
+            <?= "$".number_format($value['price'], 2, '.', ',') ?>
+          </td>
           <td>
             <form action="cart-process.php">
               <input type="hidden" name="id" value="<?= $value['id']; ?>">
@@ -44,7 +51,7 @@ $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             <?= "$" . number_format($total, 2, '.', ',') ?>
           </td>
           <td>
-            <a href="cart-process.php?id=<?php echo $item['id'] ?>&action=delete" class="btn btn-xs btn-danger">Delete</a>
+            <a href="cart-process.php?id=<?php echo $value['id'] ?>&action=delete" class="btn btn-xs btn-danger">Delete</a>
           </td>
         </tr>
       <?php $n++; } ?>

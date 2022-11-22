@@ -8,13 +8,14 @@ $user = isset($_SESSION['user_login']) ? $_SESSION['user_login'] : [];
 $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 $sqlCate = "SELECT * FROM category WHERE status = 1";
 $result = $connect->query($sqlCate);
+
 ?>
 
 <!doctype html>
 <html lang="en">
 
 <head>
-  <title>Home</title>
+  <title>ClientLTE</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -76,9 +77,9 @@ $result = $connect->query($sqlCate);
           </div>
         </li>
         <li class="nav-item">
-          <a href="cart.php" class="btn btn-primary">
-            Cart <span class="badge badge-light"><?= (!empty($cart)) ? count($cart) : 0?></span>
-          </a>
+          <?php if (!empty($user)) { ?>
+            <a href="cart.php" class="btn btn-primary">Cart <span class="badge badge-light"><?= (!empty($cart)) ? count($cart) : 0 ?></span></a>
+          <?php } ?>
         </li>
       </ul>
 

@@ -4,7 +4,7 @@ include "connection/connect.php";
 $user_search = isset($_GET['name']) ? $_GET['name'] : '';
 $status = isset($_GET['status']) ? $_GET['status'] : '';
 
-$limit = 10;
+$limit = 3;
 $pages = !empty($_GET['pages']) ? $_GET['pages'] : 1;
 $start = ($pages - 1) * $limit;
 $sql = "SELECT * FROM users WHERE name LIKE '%$user_search%' AND status LIKE '%$status%'";

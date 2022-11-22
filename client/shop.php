@@ -1,6 +1,5 @@
 <?php
 include "layout/header.php";
-
 $query = mysqli_query($connect, "SELECT MAX(price) as Maximum FROM product");
 $max_price = mysqli_fetch_assoc($query);
 
@@ -152,7 +151,10 @@ $results = $connect->query($sqlProd);
                         </strong>
                       <?php } ?>
                     </p>
-                    <a href="detail.php?id=<?= $value['id'] ?>" class="btn btn-outline-dark">View Details</a>
+                    <div class="footer d-flex align-items-center">
+                      <a href="cart-process.php?id=<?= $value['id'] ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add To Cart</a>
+                      <a href="detail.php?id=<?= $value['id'] ?>" class="btn btn-outline-dark btn-sm">View Details</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -182,12 +184,21 @@ $results = $connect->query($sqlProd);
                       <?= $value['name'] ?>
                     </h5>
                     <p class="card-text">
-                      <span class="text-danger"><del><?= number_format($value['price'], 2, '.', ',') . "$" ?></del></span>
-                      <strong class="text-success">
-                        <?= number_format($value['sale_price'], 2, '.', ',') . "$" ?>
-                      </strong>
+                      <?php if ($value['sale_price'] > 0) { ?>
+                        <span class="text-danger"><del><?= number_format($value['price'], 2, '.', ',') . "$" ?></del></span>
+                        <strong class="text-success">
+                          <?= number_format($value['sale_price'], 2, '.', ',') . "$" ?>
+                        </strong>
+                      <?php } else { ?>
+                        <strong class="text-success">
+                          <?= number_format($value['price'], 2, '.', ',') . "$" ?>
+                        </strong>
+                      <?php } ?>
                     </p>
-                    <a href="detail.php?id=<?= $value['id'] ?>" class="btn btn-outline-dark">View Details</a>
+                    <div class="footer d-flex align-items-center">
+                      <a href="cart-process.php?id=<?= $value['id'] ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add To Cart</a>
+                      <a href="detail.php?id=<?= $value['id'] ?>" class="btn btn-outline-dark btn-sm">View Details</a>
+                    </div>
                   </div>
                 </div>
               </div>
