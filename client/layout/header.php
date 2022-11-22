@@ -5,7 +5,7 @@ session_start();
 include "connection/connect.php";
 
 $user = isset($_SESSION['user_login']) ? $_SESSION['user_login'] : [];
-
+$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 $sqlCate = "SELECT * FROM category WHERE status = 1";
 $result = $connect->query($sqlCate);
 ?>
@@ -22,10 +22,11 @@ $result = $connect->query($sqlCate);
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-  
+
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Navbar</a>
 
@@ -74,8 +75,11 @@ $result = $connect->query($sqlCate);
             <?php } ?>
           </div>
         </li>
-
-
+        <li class="nav-item">
+          <a href="cart.php" class="btn btn-primary">
+            Cart <span class="badge badge-light"><?= (!empty($cart)) ? count($cart) : 0?></span>
+          </a>
+        </li>
       </ul>
 
       <form class="form-group d-flex my-2 my-lg-0" method="GET" action="shop.php">

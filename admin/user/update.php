@@ -7,11 +7,86 @@ $sql = "SELECT * FROM users WHERE id = '$id'";
 $results = $connect->query($sql);
 $row = mysqli_fetch_assoc($results);
 
+$oldPhone = $row['phone'];
+$oldEmail = $row['email'];
+
+$sqlOldPhone = "SELECT * FROM users WHERE phone NOT IN ('$oldPhone')";
+$oldPhoneData = mysqli_query($connect, $sqlOldPhone);
+
+$sqlOldMail = "SELECT * FROM users WHERE email NOT IN ('$oldEmail')";
+$oldMailData = mysqli_query($connect, $sqlOldMail);
+
+
 if (isset($_POST['submit'])) {
-  
-  if (!$errors) {
-    
-  }
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
+  $oldPassword = $_POST['oldPassword'];
+  $newPassword = $_POST['newPassword'];
+  $cnewPassword = $_POST['cnewPassword'];
+  $status = $_POST['status'];
+  $role = $_POST['role'];
+
+  do {
+    if (empty($name) && empty($email) && empty($phone)) {
+      $errors['all_required'] = "All required fields are required";
+      break;
+    }
+
+    if (empty($name)) {
+      $errors['name_required'] = "Name must not be empty";
+    }
+
+    if (empty($email)) {
+      $errors['email_required'] = "Email must not be empty";
+    } else {
+      foreach ($oldMailData as $key => $value) {
+        if ($value['email'] == $email) {
+          $errors['email_haved'] = "Email $email already exists";
+          break;
+        }
+      }
+    }
+
+    if (empty($phone)) {
+      $errors['phone_required'] = "Phone Number must not be empty";
+    } else {
+      foreach ($oldPhoneData as $key => $value) {
+        if ($value['phone'] == $phone) {
+          $errors['Phone_haved'] = "Phone Number $phone already exists";
+          break;
+        }
+      }
+    }
+
+    if (!empty($oldPassword) && !password_verify($oldPassword, $row['password'])) {
+      $errors['password_invalid'] = "Invalid password, please try again";
+    } else {
+      $newPassword = $row['password'];
+    }
+
+    $passRgx = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+
+    if (!empty($newPassword) && !preg_match($passRgx, $newPassword)) {
+      $errors['pass_invaid'] = "Invalid Password Format (at least 6 characters, maximum length is 8 characters, at least 1 special characters)";
+    }
+
+    if (!empty($cnewPassword) && $cnewPassword !== $newPassword) {
+      $errors['Pass_confirm'] = "Password incorrect";
+    }
+
+    if (!$errors) {
+      $sql = "UPDATE users SET name = '$name', email = '$email', password = '$newPassword', phone = '$phone', status = '$status', role = '$role' WHERE id = '$id'";
+      $query = mysqli_query($connect, $sql);
+
+      if (!$query) {
+        $errors['invalid_query'] = "Invalid Query ! Try Again";
+      } else {
+        header("location: ?page=user/index.php");
+        exit;
+      }
+    }
+  } while (false);
 }
 ?>
 
@@ -69,6 +144,11 @@ if (isset($_POST['submit'])) {
     <div class="form-group">
       <label for="newPassword">New Password</label>
       <input type="text" class="form-control" id="newPassword" name="newPassword" placeholder="User's New Password">
+    </div>
+
+    <div class="form-group">
+      <label for="cnewPassword">Confirm New Password</label>
+      <input type="text" class="form-control" id="cnewPassword" name="cnewPassword" placeholder="Confirm New Password">
     </div>
 
     <div class="row">

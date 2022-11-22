@@ -102,7 +102,9 @@ $result = mysqli_query($connect, $sql);
                   <?= $value['name'] ?>
                 </td>
                 <td><?= $value['email'] ?></td>
-                <td style="width: 40%;"><?= $value['password'] ?></td>
+                <td>
+                  <?= $value['password'] ?>
+                </td>
                 <td>
                   <?= $value['phone'] ?>
                 </td>

@@ -2,7 +2,7 @@
 include "connection/connect.php";
 $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 
-$prod = mysqli_query($conn, "SELECT * FROM product WHERE category_id = $id");
+$prod = mysqli_query($connect, "SELECT * FROM product WHERE category_id = $id");
 $data = mysqli_fetch_assoc($prod);
 unlink("../uploads/" . $data['image']);
 

@@ -3,13 +3,14 @@ include "connection/connect.php";
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
 $errors = [];
-$sql = "SELECT * FROM category";
-$results = $connect->query($sql);
+
 
 $sqls = "SELECT * FROM category WHERE id = '$id'";
 $result = $connect->query($sqls);
 $row = $result->fetch_assoc();
-
+$oldName = $row['name'];
+$sql = "SELECT * FROM category WHERE name not in ('$oldName')";
+$results = $connect->query($sql);
 
 if (isset($_POST['submit'])) {
 
@@ -18,6 +19,13 @@ if (isset($_POST['submit'])) {
 
   if (empty($name)) {
     $errors['name'] = "Name is required";
+  } else {
+    foreach ($results as $key => $value) {
+      if ($name == $value['name']) {
+        $errors['name_haved'] = "Category $name already exists";
+        
+      }
+    }
   }
 
   if (!$errors) {

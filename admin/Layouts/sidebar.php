@@ -32,6 +32,32 @@
             </p>
           </a>
         </li>
+
+        <li class="nav-item menu-open">
+          <a href="?page=banner/index.php" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Banner Management
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="?page=banner/index.php" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>View List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="?page=banner/add.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add</p>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
         <li class="nav-item menu-open">
           <a href="?page=category/index.php" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
