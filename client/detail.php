@@ -16,7 +16,7 @@ $off = number_format(((1 - ($data['sale_price'] / $data['price'])) * 100), 2, '.
 <div class="container p-5">
   <div class="row align-items-center">
     <div class="col-lg-6">
-      <img src="../admin/uploads/<?= $data['image'] ?>" class="card-img" alt="">
+      <img src="../public/uploads/<?= $data['image'] ?>" class="card-img" alt="">
     </div>
     <div class="col-lg-6">
       <p>SKU: <?= $data['id'] ?></p>
@@ -27,7 +27,7 @@ $off = number_format(((1 - ($data['sale_price'] / $data['price'])) * 100), 2, '.
             <del><?= "$" . number_format($data['price'], 2, '.', ',') ?></del>
           </span>
           <span class="text-success"><?= "$" . number_format($data['sale_price'], 2, '.', ',') ?></span>
-          <small class="text-primary"><?= $off." %off"?></small>
+          <small class="text-primary"><?= $off . " %off" ?></small>
         <?php } else { ?>
           <span class="text-success"><?= "$" . number_format($data['price'], 2, '.', ',') ?></span>
         <?php } ?>

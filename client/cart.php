@@ -33,11 +33,11 @@ if (!$user) {
           <td><?= $value['id'] ?></td>
           <td><?= $value['name'] ?></td>
           <td class="img" style="width: 10%;">
-            <img src="../admin/uploads/<?= $value['image'] ?>" alt="" class="card-img">
+            <img src="../public/uploads/<?= $value['image'] ?>" alt="" class="card-img">
           </td>
           <td>
-            
-            <?= "$".number_format($value['price'], 2, '.', ',') ?>
+
+            <?= "$" . number_format($value['price'], 2, '.', ',') ?>
           </td>
           <td>
             <form action="cart-process.php">
@@ -54,7 +54,8 @@ if (!$user) {
             <a href="cart-process.php?id=<?php echo $value['id'] ?>&action=delete" class="btn btn-xs btn-danger">Delete</a>
           </td>
         </tr>
-      <?php $n++; } ?>
+      <?php $n++;
+      } ?>
     <?php } else { ?>
       <h3 class="text-center text-danger">0 Data Returned</h3>
     <?php } ?>

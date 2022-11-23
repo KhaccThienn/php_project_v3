@@ -10,10 +10,6 @@ $oldData = $oldData -> fetch_assoc();
 
 if (isset($_POST['submit'])) {
   $subject = $_POST['subject'];
-  
-  if (empty($subject)) {
-    $errors['subject_required'] = "Subject must not be empty !";
-  }
 
   if (!$errors) {
     $sql = "UPDATE about_page SET subject = '$subject' WHERE id = '$id'";

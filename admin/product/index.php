@@ -43,7 +43,7 @@ $result = mysqli_query($connect, $sql);
 </section>
 
 <!-- Main content -->
-<section class="content container-fluid"> 
+<section class="content container-fluid">
   <div class="form-group">
     <a href="?page=product/add.php" class="btn btn-success">+ Add New Product</a>
   </div>
@@ -103,7 +103,7 @@ $result = mysqli_query($connect, $sql);
               <td><?= number_format($value['price'], 2, ',', '.') ?></td>
               <td><?= number_format($value['sale_price'], 2, ',', '.') ?></td>
               <td style="width: 20%;">
-                <img src="uploads/<?= $value['image'] ?>" alt="" style="width: 100%;">
+                <img src="../public/uploads/<?= $value['image'] ?>" alt="" style="width: 100%;">
               </td>
               <td><?= $value['Name'] ?></td>
 

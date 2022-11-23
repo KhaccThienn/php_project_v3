@@ -20,7 +20,7 @@ $saleProds = mysqli_query($connect, "SELECT *, ( (1 - (sale_price / price)) * 10
       <?php foreach ($banners as $key => $value) { ?>
 
         <div class="carousel-item <?= $key == 0 ? 'active' : ''; ?>">
-          <img src="../admin/uploads/<?= $value['image'] ?>" class="d-block w-100" alt="..." style="height: 700px; object-fit: fill;">
+          <img src="../public/uploads/<?= $value['image'] ?>" class="d-block w-100" alt="..." style="height: 700px; object-fit: fill;">
           <div class="carousel-caption d-none d-md-block">
             <h5><?= $value['name'] ?></h5>
             <p><?= $value['description'] ?></p>
@@ -46,18 +46,18 @@ $saleProds = mysqli_query($connect, "SELECT *, ( (1 - (sale_price / price)) * 10
   <div class="text-center h3 text-success">
     New Products
   </div>
-  <div class="row">
+  <div class="row  justify-content-between">
     <?php if ($newProds->num_rows > 0) { ?>
       <?php foreach ($newProds as $key => $value) { ?>
         <div class="col-lg-4">
           <div class="card" style="width: 16rem;">
-            <img src="../admin/uploads/<?= $value['image'] ?>" class="card-img" alt="...">
+            <img src="../public/uploads/<?= $value['image'] ?>" class="card-img" alt="...">
             <div class="card-body">
               <h5 class="card-title text-truncate" title="<?= $value['name'] ?>">
                 <?= $value['name'] ?>
               </h5>
               <p class="card-text">
-                <?php if ($value['sale_price'] > 0) { ?>
+                <?php if ($value['sale_price'] > 0 || $value['sale_price'] !== $value['price']) { ?>
                   <span class="text-danger"><del><?= number_format($value['price'], 2, '.', ',') . "$" ?></del></span>
                   <strong class="text-success">
                     <?= number_format($value['sale_price'], 2, '.', ',') . "$" ?>
@@ -88,7 +88,7 @@ $saleProds = mysqli_query($connect, "SELECT *, ( (1 - (sale_price / price)) * 10
       <?php foreach ($saleProds as $key => $value) { ?>
         <div class="col-lg-3">
           <div class="card" style="width: 16rem;">
-            <img src="../admin/uploads/<?= $value['image'] ?>" class="card-img" alt="...">
+            <img src="../public/uploads/<?= $value['image'] ?>" class="card-img" alt="...">
             <div class="card-body">
               <h5 class="card-title text-truncate" title="<?= $value['name'] ?>">
                 <?= $value['name'] ?>
@@ -99,7 +99,7 @@ $saleProds = mysqli_query($connect, "SELECT *, ( (1 - (sale_price / price)) * 10
                   <?= number_format($value['sale_price'], 2, '.', ',') . "$" ?>
                 </strong>
               </p>
-              <p class="text-primary"><?= "Sale: ".number_format($value['off'], 2, '.', ',')." %"?></p>
+              <p class="text-primary"><?= "Sale: " . number_format($value['off'], 2, '.', ',') . " %" ?></p>
               <a href="detail.php?id=<?= $value['id'] ?>" class="btn btn-outline-dark">View Details</a>
             </div>
           </div>

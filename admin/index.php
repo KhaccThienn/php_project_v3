@@ -84,12 +84,8 @@ if (isset($_SESSION['admin_login'])) {
   <script src="assets/plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="assets/plugins/ckeditor/ckeditor.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button);
-    CKEDITOR.replace('subject');
-  </script>
+
   <!-- Bootstrap 4 -->
   <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
@@ -117,7 +113,11 @@ if (isset($_SESSION['admin_login'])) {
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="assets/dist/js/pages/dashboard.js"></script>
   <script src="assets/dist/js/pages/dashboard3.js"></script>
-
+  <script src="assets/plugins/ckeditor/ckeditor.js"></script>
+  <script>
+    $.widget.bridge('uibutton', $.ui.button);
+    CKEDITOR.replace('subject');
+  </script>
 </body>
 
 </html>

@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
       $errors['image_invalid'] = "Invalid image type";
     } else {
       $image = time() . $file['name'];
-      move_uploaded_file($file['tmp_name'], "uploads/" . $image);
+      move_uploaded_file($file['tmp_name'], "public/uploads/" . $image);
     }
   } else {
     $image = $row['image'];
@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
       <label for="image">Banner's Image</label>
       <input type="file" name="image" id="image" class="form-control">
       <div class="old_image" style="width: 20%;">
-        <img src="uploads/<?= $row['image']?>" alt="" class="card-img">
+        <img src="../public/uploads/<?= $row['image'] ?>" alt="" class="card-img">
       </div>
     </div>
 

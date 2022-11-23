@@ -6,7 +6,7 @@ $sql = "SELECT * FROM product WHERE id = '$id'";
 $results = $connect->query($sql);
 $row = mysqli_fetch_assoc($results);
 
-unlink("uploads/".$row['image']);
+unlink("public/uploads/" . $row['image']);
 
 $sql = "DELETE FROM product WHERE id = $id";
 $result = $connect->query($sql);

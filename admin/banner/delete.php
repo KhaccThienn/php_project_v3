@@ -4,7 +4,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 
 $prod = mysqli_query($connect, "SELECT * FROM banner WHERE id = '$id'");
 $data = mysqli_fetch_assoc($prod);
-unlink("uploads/" . $data['image']);
+unlink("public/uploads/" . $data['image']);
 
 $sql = "DELETE FROM banner WHERE id = $id";
 $result = $connect->query($sql);

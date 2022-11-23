@@ -49,9 +49,9 @@ if (isset($_POST['submit'])) {
     if (!in_array($file['type'], $types)) {
       $errors['image_invalid'] = "Invalid image type";
     } else {
-      unlink("uploads/" . $row['image']);
+      unlink("public/uploads/" . $row['image']);
       $image = time() . $file['name'];
-      move_uploaded_file($file['tmp_name'], "uploads/" . $image);
+      move_uploaded_file($file['tmp_name'], "public/uploads/" . $image);
     }
   } else {
     $image = $row['image'];
@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
       <label for="image">Product's Image</label>
       <input type="file" name="image" class="form-control" id="image">
       <div class="image" style="width: 30%;">
-        <img src="uploads/<?= $row['image'] ?>" alt="" style="width: 100%;">
+        <img src="../public/uploads/<?= $row['image'] ?>" alt="" style="width: 100%;">
       </div>
     </div>
 

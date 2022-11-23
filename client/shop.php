@@ -1,5 +1,7 @@
 <?php
 include "layout/header.php";
+$user = isset($_SESSION['user_login']) ? $_SESSION['user_login'] : [];
+
 $query = mysqli_query($connect, "SELECT MAX(price) as Maximum FROM product");
 $max_price = mysqli_fetch_assoc($query);
 
@@ -44,7 +46,7 @@ $results = $connect->query($sqlProd);
       <?php foreach ($banners as $key => $value) { ?>
 
         <div class="carousel-item <?= $key == 0 ? 'active' : ''; ?>">
-          <img src="../admin/uploads/<?= $value['image'] ?>" class="d-block w-100" alt="..." style="height: 700px; object-fit: fill;">
+          <img src="../public/uploads/<?= $value['image'] ?>" class="d-block w-100" alt="..." style="height: 700px; object-fit: fill;">
           <div class="carousel-caption d-none d-md-block">
             <h5><?= $value['name'] ?></h5>
             <p><?= $value['description'] ?></p>
@@ -134,13 +136,13 @@ $results = $connect->query($sqlProd);
             <?php foreach ($results as $key => $value) { ?>
               <div class="col-lg-3 mt-3">
                 <div class="card" style="width: 16rem;">
-                  <img src="../admin/uploads/<?= $value['image'] ?>" class="card-img" alt="...">
+                  <img src="../public/uploads/<?= $value['image'] ?>" class="card-img" alt="...">
                   <div class="card-body">
                     <h5 class="card-title text-truncate" title="<?= $value['name'] ?>">
                       <?= $value['name'] ?>
                     </h5>
                     <p class="card-text">
-                      <?php if ($value['sale_price'] > 0) { ?>
+                      <?php if ($value['sale_price'] > 0 || $value['sale_price'] !== $value['price']) { ?>
                         <span class="text-danger"><del><?= number_format($value['price'], 2, '.', ',') . "$" ?></del></span>
                         <strong class="text-success">
                           <?= number_format($value['sale_price'], 2, '.', ',') . "$" ?>
@@ -152,7 +154,11 @@ $results = $connect->query($sqlProd);
                       <?php } ?>
                     </p>
                     <div class="footer d-flex align-items-center">
-                      <a href="cart-process.php?id=<?= $value['id'] ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add To Cart</a>
+                      <?php if (!$user) { ?>
+                        <div></div>
+                      <?php } else { ?>
+                        <a href="cart-process.php?id=<?= $value['id'] ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add To Cart</a>
+                      <?php } ?>
                       <a href="detail.php?id=<?= $value['id'] ?>" class="btn btn-outline-dark btn-sm">View Details</a>
                     </div>
                   </div>
@@ -178,13 +184,13 @@ $results = $connect->query($sqlProd);
             <?php foreach ($results as $key => $value) { ?>
               <div class="col-lg-3 mt-3">
                 <div class="card" style="width: 16rem;">
-                  <img src="../admin/uploads/<?= $value['image'] ?>" class="card-img-top" alt="...">
+                  <img src="../public/uploads/<?= $value['image'] ?>" class="card-img-top" alt="...">
                   <div class="card-body">
                     <h5 class="card-title" title="<?= $value['name'] ?>">
                       <?= $value['name'] ?>
                     </h5>
                     <p class="card-text">
-                      <?php if ($value['sale_price'] > 0) { ?>
+                      <?php if ($value['sale_price'] > 0 || $value['sale_price'] !== $value['price']) { ?>
                         <span class="text-danger"><del><?= number_format($value['price'], 2, '.', ',') . "$" ?></del></span>
                         <strong class="text-success">
                           <?= number_format($value['sale_price'], 2, '.', ',') . "$" ?>
@@ -196,7 +202,11 @@ $results = $connect->query($sqlProd);
                       <?php } ?>
                     </p>
                     <div class="footer d-flex align-items-center">
-                      <a href="cart-process.php?id=<?= $value['id'] ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add To Cart</a>
+                      <?php if (!$user) { ?>
+                        <div></div>
+                      <?php } else { ?>
+                        <a href="cart-process.php?id=<?= $value['id'] ?>" class="btn btn-outline-primary btn-sm"><i class="fa fa-cart-plus" aria-hidden="true"></i>Add To Cart</a>
+                      <?php } ?>
                       <a href="detail.php?id=<?= $value['id'] ?>" class="btn btn-outline-dark btn-sm">View Details</a>
                     </div>
                   </div>

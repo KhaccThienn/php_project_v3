@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
       $errors['image_invalid'] = "Invalid image type";
     } else {
       $image = time() . $file['name'];
-      move_uploaded_file($file['tmp_name'], "uploads/" . $image);
+      move_uploaded_file($file['tmp_name'], "public/uploads/" . $image);
     }
   }
   if (empty($description)) {

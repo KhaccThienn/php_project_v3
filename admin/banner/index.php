@@ -79,8 +79,8 @@ $result = mysqli_query($connect, $sql);
               <td><?= $value['id'] ?></td>
               <td><?= $value['name'] ?></td>
               <td style="width: 20%;">
-                <img src="uploads/<?= $value['image'] ?>" class="card-img" alt="">
-                
+                <img src="../public/uploads/<?= $value['image'] ?>" class="card-img" alt="">
+
               </td>
               <td><?= $value['description'] ?></td>
               <td>
